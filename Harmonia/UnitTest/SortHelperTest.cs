@@ -11,9 +11,11 @@ namespace UnitTest
         [TestMethod]
         public void MergeSort_1()
         {
-            var target = new[] { 3, 1, 5, 4, 2 };
             var expected = new[] { 1, 2, 3, 4, 5 };
-            CollectionAssert.AreEqual(expected, target.MergeSort());
+            CollectionAssert.AreEqual(expected, new[] { 1, 2, 3, 4, 5 }.MergeSort());
+            CollectionAssert.AreEqual(expected, new[] { 5, 4, 3, 2, 1 }.MergeSort());
+            CollectionAssert.AreEqual(expected, new[] { 4, 2, 5, 1, 3 }.MergeSort());
+            CollectionAssert.AreEqual(expected, new[] { 3, 1, 5, 4, 2 }.MergeSort());
         }
 
         [TestMethod]
@@ -27,9 +29,11 @@ namespace UnitTest
         [TestMethod]
         public void BubbleSort_1()
         {
-            var target = new[] { 3, 1, 5, 4, 2 };
             var expected = new[] { 1, 2, 3, 4, 5 };
-            CollectionAssert.AreEqual(expected, target.BubbleSort());
+            CollectionAssert.AreEqual(expected, new[] { 1, 2, 3, 4, 5 }.BubbleSort());
+            CollectionAssert.AreEqual(expected, new[] { 5, 4, 3, 2, 1 }.BubbleSort());
+            CollectionAssert.AreEqual(expected, new[] { 4, 2, 5, 1, 3 }.BubbleSort());
+            CollectionAssert.AreEqual(expected, new[] { 3, 1, 5, 4, 2 }.BubbleSort());
         }
 
         [TestMethod]

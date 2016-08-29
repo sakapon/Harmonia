@@ -27,6 +27,16 @@ namespace UnitTest
         }
 
         [TestMethod]
+        public void MergeSort_3()
+        {
+            var target = Enumerable.Range(1, 20).Select(i => i * i).ToArray();
+            var actual = target.MergeSort(i => i.ToString());
+
+            foreach (var i in actual)
+                Console.WriteLine(i);
+        }
+
+        [TestMethod]
         public void BubbleSort_1()
         {
             var expected = new[] { 1, 2, 3, 4, 5 };
@@ -42,6 +52,16 @@ namespace UnitTest
             var expected = Enumerable.Range(0, 10000).ToArray();
             var target = expected.Reverse().ToArray();
             CollectionAssert.AreEqual(expected, target.BubbleSort());
+        }
+
+        [TestMethod]
+        public void BubbleSort_3()
+        {
+            var target = Enumerable.Range(1, 20).Select(i => i * i).ToArray();
+            var actual = target.BubbleSort(i => i.ToString());
+
+            foreach (var i in actual)
+                Console.WriteLine(i);
         }
     }
 }

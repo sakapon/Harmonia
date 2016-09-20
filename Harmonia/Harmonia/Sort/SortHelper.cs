@@ -2,10 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Harmonia
+namespace Harmonia.Sort
 {
     public static class SortHelper
     {
+        public static void Swap<TSource>(this IList<TSource> source, int index1, int index2)
+        {
+            var e = source[index1];
+            source[index1] = source[index2];
+            source[index2] = e;
+        }
     }
 
     struct KeyedObject<TSource, TKey> : IComparable<KeyedObject<TSource, TKey>> where TKey : IComparable<TKey>

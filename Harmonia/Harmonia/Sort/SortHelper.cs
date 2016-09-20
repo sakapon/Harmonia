@@ -14,6 +14,18 @@ namespace Harmonia.Sort
         }
     }
 
+    struct KeyedObject0<TSource, TKey>
+    {
+        public TSource Target { get; }
+        public TKey Key { get; }
+
+        public KeyedObject0(TSource target, TKey key)
+        {
+            Target = target;
+            Key = key;
+        }
+    }
+
     struct KeyedObject<TSource, TKey> : IComparable<KeyedObject<TSource, TKey>> where TKey : IComparable<TKey>
     {
         public TSource Target { get; }

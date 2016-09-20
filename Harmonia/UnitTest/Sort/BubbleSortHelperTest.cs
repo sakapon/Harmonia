@@ -11,23 +11,42 @@ namespace UnitTest.Sort
         [TestMethod]
         public void BubbleSort_1()
         {
-            var expected = new[] { 1, 2, 3, 4, 5 };
-            CollectionAssert.AreEqual(expected, new[] { 1, 2, 3, 4, 5 }.BubbleSort());
-            CollectionAssert.AreEqual(expected, new[] { 5, 4, 3, 2, 1 }.BubbleSort());
-            CollectionAssert.AreEqual(expected, new[] { 4, 2, 5, 1, 3 }.BubbleSort());
-            CollectionAssert.AreEqual(expected, new[] { 3, 1, 5, 4, 2 }.BubbleSort());
+            var start = 1;
+            var count = 1000;
+            var expected = Enumerable.Range(start, count).ToArray();
+
+            for (var i = 0; i < 10; i++)
+            {
+                var target = RandomHelper.ShuffleRange(start, count).ToArray();
+                target.BubbleSort();
+                CollectionAssert.AreEqual(expected, target);
+            }
         }
 
         [TestMethod]
         public void BubbleSort_2()
         {
-            var expected = Enumerable.Range(0, 10000).ToArray();
-            var target = expected.Reverse().ToArray();
-            CollectionAssert.AreEqual(expected, target.BubbleSort());
+            var start = 1;
+            var count = 10000;
+            var expected = Enumerable.Range(start, count).ToArray();
+            var target = Enumerable.Range(start, count).ToArray();
+            target.BubbleSort();
+            CollectionAssert.AreEqual(expected, target);
         }
 
         [TestMethod]
         public void BubbleSort_3()
+        {
+            var start = 1;
+            var count = 10000;
+            var expected = Enumerable.Range(start, count).ToArray();
+            var target = Enumerable.Range(start, count).Reverse().ToArray();
+            target.BubbleSort();
+            CollectionAssert.AreEqual(expected, target);
+        }
+
+        [TestMethod]
+        public void BubbleSort_4()
         {
             var target = Enumerable.Range(1, 20).Select(i => i * i).ToArray();
             var actual = target.BubbleSort(i => i.ToString());

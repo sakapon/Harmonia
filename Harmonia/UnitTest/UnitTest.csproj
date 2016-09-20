@@ -54,8 +54,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomHelper.cs" />
-    <Compile Include="SortHelperTest.cs" />
     <Compile Include="Sort\BubbleSortHelperTest.cs" />
+    <Compile Include="Sort\MergeSortHelperTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Harmonia\Harmonia.csproj">

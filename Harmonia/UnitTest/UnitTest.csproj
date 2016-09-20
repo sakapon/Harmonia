@@ -56,6 +56,7 @@
     <Compile Include="RandomHelper.cs" />
     <Compile Include="Sort\BubbleSortHelperTest.cs" />
     <Compile Include="Sort\MergeSortHelperTest.cs" />
+    <Compile Include="Sort\QuickSortHelperTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Harmonia\Harmonia.csproj">

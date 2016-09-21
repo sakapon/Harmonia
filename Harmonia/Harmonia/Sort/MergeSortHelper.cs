@@ -7,22 +7,23 @@ namespace Harmonia.Sort
     public static class MergeSortHelper
     {
         /// <summary>
-        /// 要素をキーに従って昇順に並べ替えます。
+        /// シーケンスの要素をキーに従って昇順に並べ替えます。
         /// マージ ソートを使用します。
         /// </summary>
         /// <typeparam name="TSource">要素の型。</typeparam>
         /// <typeparam name="TKey">キーの型。</typeparam>
         /// <param name="source">並べ替える配列。</param>
         /// <param name="keySelector">キーを抽出する関数。</param>
-        /// <returns>並べ替えられた配列。</returns>
-        public static TSource[] MergeSort<TSource, TKey>(this TSource[] source, Func<TSource, TKey> keySelector) where TKey : IComparable<TKey>
+        /// <returns>並べ替えられたシーケンス。</returns>
+        public static IEnumerable<TSource> MergeSort<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector)
         {
+            if (source == null) throw new ArgumentNullException(nameof(source));
             if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
 
-            var keyed = source.Select(e => new KeyedObject<TSource, TKey>(e, keySelector(e))).ToArray();
+            var keyed = source.Select(e => new KeyedObject0<TSource, TKey>(e, keySelector(e))).ToArray();
             var comparer = Comparer<TKey>.Default;
             keyed.MergeSort((x1, x2) => comparer.Compare(x1.Key, x2.Key));
-            return keyed.Select(_ => _.Target).ToArray();
+            return keyed.Select(_ => _.Target);
         }
 
         /// <summary>

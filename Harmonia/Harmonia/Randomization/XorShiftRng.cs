@@ -9,15 +9,20 @@ namespace Harmonia.Randomization
 
         public XorShiftRng()
         {
-            InitializeSeeds();
+            InitializeSeed();
         }
 
-        public void InitializeSeeds()
+        public XorShiftRng(long seed)
         {
-            InitializeSeeds(DateTime.Now.Ticks);
+            InitializeSeed(seed);
         }
 
-        public void InitializeSeeds(long seed)
+        public void InitializeSeed()
+        {
+            InitializeSeed(DateTime.Now.Ticks);
+        }
+
+        public void InitializeSeed(long seed)
         {
             i = (int)seed;
             j = seed;

@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Randomization\XorShiftRng.cs" />
     <Compile Include="Sort\QuickSortHelper.cs" />
     <Compile Include="Sort\SortHelper.cs" />
     <Compile Include="Sort\BubbleSortHelper.cs" />

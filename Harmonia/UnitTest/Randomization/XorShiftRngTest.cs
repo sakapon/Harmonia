@@ -55,5 +55,18 @@ namespace UnitTest.Randomization
                 Console.WriteLine(x);
             }
         }
+
+        [TestMethod]
+        public void GenerateDoubleExceptZero()
+        {
+            var rng = new XorShiftRng();
+
+            for (var i = 0; i < 100; i++)
+            {
+                var x = rng.GenerateDoubleExceptZero();
+                Assert.IsTrue(0 < x && x < 1);
+                Console.WriteLine(x);
+            }
+        }
     }
 }

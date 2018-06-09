@@ -19,7 +19,7 @@ namespace Harmonia.Conversion
             return string.Concat(Encoding.UTF8.GetBytes(value).Select(b => "%" + b.ToString("X2")));
         }
 
-        static string PercentDecode(this string value)
+        internal static string PercentDecode(this string value)
         {
             // Suppose the value is well-formed.
             var bytes = Enumerable.Range(0, value.Length / 3)

@@ -31,21 +31,21 @@ namespace Harmonia.Conversion
             return Encoding.UTF8.GetString(bytes);
         }
 
-        public static string UrlEncode(string value)
+        public static string UrlEncode(this string value)
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
 
             return Regex.Replace(value, "[^-._~0-9A-Za-z]+", m => PercentEncode(m.Value));
         }
 
-        public static string UrlEncodeForUrl(string value)
+        public static string UrlEncodeForUrl(this string value)
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
 
             return Regex.Replace(value, @"[^-._~!#$&'()*+,/:;=?@[\]0-9A-Za-z]+", m => PercentEncode(m.Value));
         }
 
-        public static string UrlDecode(string value)
+        public static string UrlDecode(this string value)
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
 

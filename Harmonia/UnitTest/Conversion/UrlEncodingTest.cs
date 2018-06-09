@@ -26,5 +26,15 @@ namespace UnitTest.Conversion
             Assert.AreEqual(UrlEncoding.PercentEncode(UrlEncoding.Rfc3986_OtherChars), UrlEncoding.UrlEncode(UrlEncoding.Rfc3986_OtherChars));
             Assert.AreEqual("%20%21%22-0Aa%E3%81%82", UrlEncoding.UrlEncode(" !\"-0Aaあ"));
         }
+
+        [TestMethod]
+        public void UrlEncodeForUrl()
+        {
+            Assert.AreEqual(UrlEncoding.Alphanumerics, UrlEncoding.UrlEncodeForUrl(UrlEncoding.Alphanumerics));
+            Assert.AreEqual(UrlEncoding.Rfc3986_UnreservedChars, UrlEncoding.UrlEncodeForUrl(UrlEncoding.Rfc3986_UnreservedChars));
+            Assert.AreEqual(UrlEncoding.Rfc3986_ReservedChars, UrlEncoding.UrlEncodeForUrl(UrlEncoding.Rfc3986_ReservedChars));
+            Assert.AreEqual(UrlEncoding.PercentEncode(UrlEncoding.Rfc3986_OtherChars), UrlEncoding.UrlEncodeForUrl(UrlEncoding.Rfc3986_OtherChars));
+            Assert.AreEqual("https://abc.xyz/%20!%22-0Aa%E3%81%82", UrlEncoding.UrlEncodeForUrl("https://abc.xyz/ !\"-0Aaあ"));
+        }
     }
 }

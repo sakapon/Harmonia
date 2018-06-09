@@ -44,5 +44,12 @@ namespace Harmonia.Conversion
 
             return Regex.Replace(value, @"[^-._~!#$&'()*+,/:;=?@[\]0-9A-Za-z]+", m => PercentEncode(m.Value));
         }
+
+        public static string UrlDecode(string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+
+            return Regex.Replace(value, "(%[0-9A-Fa-f]{2})+", m => PercentDecode(m.Value));
+        }
     }
 }

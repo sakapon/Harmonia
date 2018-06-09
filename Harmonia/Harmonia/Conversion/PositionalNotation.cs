@@ -11,6 +11,8 @@ namespace Harmonia.Conversion
 
         public static string ToStringInBase(this int value, int toBase)
         {
+            if (toBase < 2 || NumberChars.Length < toBase) throw new ArgumentOutOfRangeException(nameof(toBase), toBase, $"The value must be x that satisfies 2 <= x <= {NumberChars.Length}.");
+
             if (value == 0) return "0";
             if (value < 0) return "-" + ToStringInBase(-value, toBase);
 
@@ -26,6 +28,8 @@ namespace Harmonia.Conversion
 
         public static int FromStringInBase(this string value, int fromBase)
         {
+            if (fromBase < 2 || NumberChars.Length < fromBase) throw new ArgumentOutOfRangeException(nameof(fromBase), fromBase, $"The value must be x that satisfies 2 <= x <= {NumberChars.Length}.");
+
             if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.StartsWith("-")) return -FromStringInBase(value.Substring(1), fromBase);
 

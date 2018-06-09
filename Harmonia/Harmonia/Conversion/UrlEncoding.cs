@@ -35,21 +35,31 @@ namespace Harmonia.Conversion
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
 
-            return Regex.Replace(value, "[^-._~0-9A-Za-z]+", m => PercentEncode(m.Value));
+            return Regex.Replace(value, "[^-._~0-9A-Za-z]+", m => m.Value.PercentEncode());
         }
 
         public static string UrlEncodeForUrl(this string value)
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
 
-            return Regex.Replace(value, @"[^-._~!#$&'()*+,/:;=?@[\]0-9A-Za-z]+", m => PercentEncode(m.Value));
+            return Regex.Replace(value, @"[^-._~!#$&'()*+,/:;=?@[\]0-9A-Za-z]+", m => m.Value.PercentEncode());
         }
 
         public static string UrlDecode(this string value)
         {
             if (value == null) throw new ArgumentNullException(nameof(value));
 
-            return Regex.Replace(value, "(%[0-9A-Fa-f]{2})+", m => PercentDecode(m.Value));
+            return Regex.Replace(value, "(%[0-9A-Fa-f]{2})+", m => m.Value.PercentDecode());
+        }
+
+        public static string UrlEncodeForForm(this string value) =>
+             value.UrlEncode().Replace("%20", "+");
+
+        public static string UrlDecodeForForm(this string value)
+        {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+
+            return value.Replace("+", "%20").UrlDecode();
         }
     }
 }

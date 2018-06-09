@@ -47,5 +47,15 @@ namespace UnitTest.Conversion
             Assert.AreEqual(Rfc3986_OtherChars, Rfc3986_OtherChars.UrlEncode().UrlDecode());
             Assert.AreEqual("https://abc.xyz/ !\"-0Aaあ%20", "https://abc.xyz/%20!%22-0Aa%E3%81%82%2520".UrlDecode());
         }
+
+        [TestMethod]
+        public void UrlEncodeForForm()
+        {
+            var original = "Hello, the \"World+\".";
+            var encoded = "Hello%2C+the+%22World%2B%22.";
+
+            Assert.AreEqual(encoded, original.UrlEncodeForForm());
+            Assert.AreEqual(original, encoded.UrlDecodeForForm());
+        }
     }
 }

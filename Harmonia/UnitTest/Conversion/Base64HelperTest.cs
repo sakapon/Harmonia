@@ -36,6 +36,23 @@ namespace UnitTest.Conversion
         }
 
         [TestMethod]
+        public void ToBase64_Random()
+        {
+            void Test(int bytesLength)
+            {
+                var bytes = RandomHelper.GenerateBytes(bytesLength);
+                var text = Convert.ToBase64String(bytes);
+                Console.WriteLine(text);
+
+                Assert.AreEqual(text, bytes.ToBase64());
+                CollectionAssert.AreEqual(bytes, text.FromBase64());
+            }
+
+            for (var i = 1; i <= 64; i++)
+                Test(i);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void FromBase64_Format_Length() => "===".FromBase64();
 

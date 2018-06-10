@@ -34,5 +34,17 @@ namespace UnitTest.Conversion
             Test("QUJDREVG", new byte[] { 65, 66, 67, 68, 69, 70 });
             Test("QUJDREVGRw==", new byte[] { 65, 66, 67, 68, 69, 70, 71 });
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void FromBase64_Format_Length() => "===".FromBase64();
+
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void FromBase64_Format_Chars() => "===-".FromBase64();
+
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void FromBase64_Format_Padding() => "A===".FromBase64();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Harmonia.Conversion
 {
@@ -11,6 +12,8 @@ namespace Harmonia.Conversion
 
         public static string ToBase64(this byte[] bytes)
         {
+            if (bytes == null) throw new ArgumentNullException(nameof(bytes));
+
             var q = bytes.Length / 3;
             var m = bytes.Length % 3;
 
@@ -52,7 +55,12 @@ namespace Harmonia.Conversion
 
         public static byte[] FromBase64(this string value)
         {
+            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value.Length % 4 != 0) throw new FormatException();
+            if (!Regex.IsMatch(value, $"^[{Base64Chars}]*$")) throw new FormatException();
+
             var ints = value.TrimEnd('=').Select(c => CharIndexMap[c]).ToArray();
+            if (ints.Length % 4 == 1) throw new FormatException();
 
             var q = ints.Length / 4;
             var m = ints.Length % 4;

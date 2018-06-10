@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Harmonia.Conversion
 {
@@ -32,6 +33,7 @@ namespace Harmonia.Conversion
 
             if (value == null) throw new ArgumentNullException(nameof(value));
             if (value.StartsWith("-")) return -FromStringInBase(value.Substring(1), fromBase);
+            if (!Regex.IsMatch(value, $"^[{NumberChars.Substring(0, fromBase)}]+$")) throw new FormatException();
 
             var result = 0;
             for (var i = 0; i < value.Length; i++)

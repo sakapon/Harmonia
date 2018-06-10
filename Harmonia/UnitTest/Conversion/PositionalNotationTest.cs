@@ -38,5 +38,9 @@ namespace UnitTest.Conversion
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void FromStringInBase_Error() => "123".FromStringInBase(37);
+
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void FromStringInBase_Format() => "123".FromStringInBase(3);
     }
 }

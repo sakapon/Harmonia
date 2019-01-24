@@ -91,5 +91,29 @@ namespace Harmonia.Numerics
             }
             return sum;
         }
+
+        public static double Log(double x)
+        {
+            var t = (x - 1) / (x + 1);
+
+            var t2 = t * t;
+            var p = t;
+            var sum = t;
+
+            for (var i = 3; i < 100; i += 2)
+            {
+                p *= t2;
+
+                var temp = sum + p / i;
+                if (sum == temp) break;
+                sum = temp;
+            }
+            return 2 * sum;
+        }
+
+        public static double Pow(double x, double p)
+        {
+            return Exp(p * Log(x));
+        }
     }
 }

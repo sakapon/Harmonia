@@ -63,5 +63,27 @@ namespace UnitTest.Numerics
             Test(2.0);
             Test(Math.PI);
         }
+
+        [TestMethod]
+        public void Log()
+        {
+            void Test(double x) => AssertNearlyEqual(Math.Log(x), ElementaryFunctions.Log(x));
+
+            Test(1.0);
+            Test(2.0);
+            Test(3.0);
+            Test(0.5);
+            Test(Math.E);
+        }
+
+        [TestMethod]
+        public void Pow()
+        {
+            void Test(double x, double p) => AssertNearlyEqual(Math.Pow(x, p), ElementaryFunctions.Pow(x, p));
+
+            Test(2.0, 3.0);
+            Test(2.0, 0.5);
+            Test(Math.PI, Math.E);
+        }
     }
 }

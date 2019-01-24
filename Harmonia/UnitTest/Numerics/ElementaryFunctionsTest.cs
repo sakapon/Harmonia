@@ -53,6 +53,22 @@ namespace UnitTest.Numerics
         }
 
         [TestMethod]
+        public void Tan()
+        {
+            void Test(double expected, double x) => AssertNearlyEqual(expected, ElementaryFunctions.Tan(x));
+
+            Test(Math.Sqrt(3), Math.PI / 3);
+            Test(1.0, Math.PI / 4);
+            Test(1 / Math.Sqrt(3), Math.PI / 6);
+            Test(0.0, 0);
+            Test(-1 / Math.Sqrt(3), -Math.PI / 6);
+            Test(-1.0, -Math.PI / 4);
+            Test(-Math.Sqrt(3), -Math.PI / 3);
+
+            Test(2 - Math.Sqrt(3), Math.PI / 12);
+        }
+
+        [TestMethod]
         public void Exp()
         {
             void Test(double x) => AssertNearlyEqual(Math.Exp(x), ElementaryFunctions.Exp(x));
@@ -84,6 +100,28 @@ namespace UnitTest.Numerics
             Test(2.0, 3.0);
             Test(2.0, 0.5);
             Test(Math.PI, Math.E);
+        }
+
+        [TestMethod]
+        public void Sqrt()
+        {
+            void Test(double x) => AssertNearlyEqual(Math.Sqrt(x), ElementaryFunctions.Sqrt(x));
+
+            Test(1.0);
+            Test(2.0);
+            Test(3.0);
+            Test(127.0);
+        }
+
+        [TestMethod]
+        public void Cbrt()
+        {
+            void Test(double x) => AssertNearlyEqual(Math.Pow(x, 1.0 / 3), ElementaryFunctions.Cbrt(x));
+
+            Test(1.0);
+            Test(2.0);
+            Test(3.0);
+            Test(127.0);
         }
     }
 }

@@ -74,6 +74,11 @@ namespace Harmonia.Numerics
             return sum;
         }
 
+        public static double Tan(double x)
+        {
+            return Sin(x) / Cos(x);
+        }
+
         public static double Exp(double x)
         {
             var c = 1.0;
@@ -94,6 +99,9 @@ namespace Harmonia.Numerics
 
         public static double Log(double x)
         {
+            if (x <= 0) throw new ArgumentOutOfRangeException(nameof(x), x, "The value must be positive.");
+
+            // http://math-lab.main.jp/taylor7b.html
             var t = (x - 1) / (x + 1);
 
             var t2 = t * t;
@@ -114,6 +122,32 @@ namespace Harmonia.Numerics
         public static double Pow(double x, double p)
         {
             return Exp(p * Log(x));
+        }
+
+        public static double Sqrt(double x)
+        {
+            var r = x;
+
+            for (var i = 0; i < 100; i++)
+            {
+                var temp = (r + x / r) / 2;
+                if (r == temp) break;
+                r = temp;
+            }
+            return r;
+        }
+
+        public static double Cbrt(double x)
+        {
+            var r = x;
+
+            for (var i = 0; i < 100; i++)
+            {
+                var temp = (2 * r + x / (r * r)) / 3;
+                if (r == temp) break;
+                r = temp;
+            }
+            return r;
         }
     }
 }

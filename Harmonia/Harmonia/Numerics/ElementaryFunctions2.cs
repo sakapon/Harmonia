@@ -18,6 +18,19 @@ namespace Harmonia.Numerics
             return sum;
         }
 
+        public static double Recurse(Func<double, double> func, double x0, int count = 100)
+        {
+            var r = x0;
+
+            for (var i = 0; i < count; i++)
+            {
+                var temp = func(r);
+                if (r == temp) break;
+                r = temp;
+            }
+            return r;
+        }
+
         public static double Exp(double x)
         {
             return GetTerms().SumForApproximation();
@@ -59,5 +72,9 @@ namespace Harmonia.Numerics
                 }
             }
         }
+
+        public static double Sqrt(double x) => Recurse(t => (t + x / t) / 2, x);
+
+        public static double Cbrt(double x) => Recurse(t => (2 * t + x / (t * t)) / 3, x);
     }
 }

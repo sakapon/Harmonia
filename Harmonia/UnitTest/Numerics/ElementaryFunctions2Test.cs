@@ -33,5 +33,27 @@ namespace UnitTest.Numerics
             Test(0.5);
             Test(Math.E);
         }
+
+        [TestMethod]
+        public void Sqrt()
+        {
+            void Test(double x) => AssertNearlyEqual(Math.Sqrt(x), ElementaryFunctions2.Sqrt(x));
+
+            Test(1.0);
+            Test(2.0);
+            Test(3.0);
+            Test(127.0);
+        }
+
+        [TestMethod]
+        public void Cbrt()
+        {
+            void Test(double x) => AssertNearlyEqual(Math.Pow(x, 1.0 / 3), ElementaryFunctions2.Cbrt(x));
+
+            Test(1.0);
+            Test(2.0);
+            Test(3.0);
+            Test(127.0);
+        }
     }
 }

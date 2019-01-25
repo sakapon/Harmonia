@@ -5,7 +5,7 @@ namespace Harmonia.Numerics
 {
     public static class ElementaryFunctions2
     {
-        public static double SumForApproximation(this IEnumerable<double> terms)
+        public static double AsymptoticSum(this IEnumerable<double> terms)
         {
             var sum = 0.0;
 
@@ -18,7 +18,7 @@ namespace Harmonia.Numerics
             return sum;
         }
 
-        public static double Recurse(Func<double, double> func, double x0, int count = 100)
+        public static double AsymptoticLimit(Func<double, double> func, double x0, int count = 100)
         {
             var r = x0;
 
@@ -33,7 +33,7 @@ namespace Harmonia.Numerics
 
         public static double Exp(double x)
         {
-            return GetTerms().SumForApproximation();
+            return GetTerms().AsymptoticSum();
 
             IEnumerable<double> GetTerms()
             {
@@ -54,7 +54,7 @@ namespace Harmonia.Numerics
         {
             if (x <= 0) throw new ArgumentOutOfRangeException(nameof(x), x, "The value must be positive.");
 
-            return 2 * GetTerms().SumForApproximation();
+            return 2 * GetTerms().AsymptoticSum();
 
             IEnumerable<double> GetTerms()
             {
@@ -73,8 +73,8 @@ namespace Harmonia.Numerics
             }
         }
 
-        public static double Sqrt(double x) => Recurse(t => (t + x / t) / 2, x);
+        public static double Sqrt(double x) => AsymptoticLimit(t => (t + x / t) / 2, x);
 
-        public static double Cbrt(double x) => Recurse(t => (2 * t + x / (t * t)) / 3, x);
+        public static double Cbrt(double x) => AsymptoticLimit(t => (2 * t + x / (t * t)) / 3, x);
     }
 }

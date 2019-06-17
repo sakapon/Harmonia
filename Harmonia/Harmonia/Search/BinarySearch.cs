@@ -16,10 +16,11 @@ namespace Harmonia.Search
                 if (count == 1)
                     return array[start] == value ? start : -1;
 
-                var m = start + (count >> 1);
-                return array[m] > value ?
-                    Search(start, m - start) :
-                    Search(m, start + count - m);
+                var c1 = count >> 1;
+                var s2 = start + c1;
+                return array[s2] > value ?
+                    Search(start, c1) :
+                    Search(s2, count - c1);
             }
         }
     }

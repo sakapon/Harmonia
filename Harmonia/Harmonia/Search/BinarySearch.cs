@@ -48,6 +48,7 @@ namespace Harmonia.Search
             }
         }
 
+        // ソート済であることを前提とします。
         public static int GetIndex<T>(T[] array, T value)
         {
             if (array == null) throw new ArgumentNullException(nameof(array));
@@ -69,6 +70,8 @@ namespace Harmonia.Search
             }
         }
 
+        // ソート済であることを前提とします。
+        // a[i] <= x < a[i+1] のとき、i を返します。
         public static int GetIndexByRange<T>(T[] array, T value)
         {
             if (array == null) throw new ArgumentNullException(nameof(array));

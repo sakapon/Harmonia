@@ -154,7 +154,7 @@ namespace Harmonia.Numerics
         {
             var r = 1.0;
             while (x * r > 1)
-                r /= 10;
+                r *= 0.5;
 
             for (var i = 0; i < 100; i++)
             {

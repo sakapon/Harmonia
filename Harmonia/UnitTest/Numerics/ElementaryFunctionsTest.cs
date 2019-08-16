@@ -136,6 +136,7 @@ namespace UnitTest.Numerics
             Test(3.0);
             Test(7.0);
             Test(256.0);
+            Test(12345);
         }
     }
 }

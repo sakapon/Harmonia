@@ -149,5 +149,20 @@ namespace Harmonia.Numerics
             }
             return r;
         }
+
+        public static double Inverse(double x)
+        {
+            var r = 1.0;
+            while (x * r > 1)
+                r /= 10;
+
+            for (var i = 0; i < 100; i++)
+            {
+                var temp = r * (2 - x * r);
+                if (r == temp) break;
+                r = temp;
+            }
+            return r;
+        }
     }
 }

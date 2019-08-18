@@ -152,17 +152,14 @@ namespace Harmonia.Numerics
 
         public static double Inverse(double x)
         {
-            var r = 1.0;
-            while (x * r > 1)
-                r *= 0.5;
+            var c = 1.0;
+            while (x < 0.25) { x *= 2; c *= 2; }
+            while (x > 0.5) { x *= 0.5; c *= 0.5; }
 
-            for (var i = 0; i < 100; i++)
-            {
-                var temp = r * (2 - x * r);
-                if (r == temp) break;
-                r = temp;
-            }
-            return r;
+            double temp, r = 4 * (1 - x);
+            for (var i = 0; i < 100; i++, r = temp)
+                if (r == (temp = r * (2 - x * r))) break;
+            return c * r;
         }
     }
 }

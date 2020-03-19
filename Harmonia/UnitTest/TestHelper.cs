@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTest
 {
 	public static class TestHelper
 	{
+		public static void AssertNearlyEqual(double expected, double actual, int digits = 9) =>
+			Assert.AreEqual(0.0, Math.Round(expected - actual, digits));
+
 		public static void MeasureTime(Action action)
 		{
 			var sw = Stopwatch.StartNew();

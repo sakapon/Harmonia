@@ -52,5 +52,25 @@ namespace UnitTest.Search
 				}
 			}
 		}
+
+		[TestMethod]
+		public void First_Sqrt()
+		{
+			TestHelper.AssertNearlyEqual(10, BinarySearch.First(0.0, 100, x => x * x >= 100));
+			TestHelper.AssertNearlyEqual(15, BinarySearch.First(15.0, 20, x => x * x >= 100));
+			Assert.AreEqual(5, BinarySearch.First(0.0, 5, x => x * x >= 100));
+
+			TestHelper.AssertNearlyEqual(Math.Sqrt(3), BinarySearch.First(0.0, 10, x => x * x > 3));
+		}
+
+		[TestMethod]
+		public void Last_Sqrt()
+		{
+			TestHelper.AssertNearlyEqual(10, BinarySearch.Last(0.0, 100, x => x * x < 100));
+			TestHelper.AssertNearlyEqual(5, BinarySearch.Last(0.0, 5, x => x * x < 100));
+			Assert.AreEqual(15, BinarySearch.Last(15.0, 20, x => x * x < 100));
+
+			TestHelper.AssertNearlyEqual(Math.Sqrt(3), BinarySearch.Last(0.0, 10, x => x * x <= 3));
+		}
 	}
 }

@@ -21,7 +21,7 @@ namespace Harmonia.Numerics
             }
         }
 
-        public static int Lcm(int x, int y) => x * y / Gcd(x, y);
+        public static int Lcm(int x, int y) => x / Gcd(x, y) * y;
 
         public static bool IsSquareNumber(int x)
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Harmonia.Search
 {
-    public static class BinarySearch
+    public static class BinarySearchOld
     {
         // ソート済であることを前提とします。
         public static int GetIndex(int[] array, int value)

@@ -149,5 +149,18 @@ namespace Harmonia.Numerics
             }
             return r;
         }
+
+        public static double Inverse(double x)
+        {
+            var c = 1.0;
+            while (x < 0.25) { x *= 2; c *= 2; }
+            while (x > 0.5) { x *= 0.5; c *= 0.5; }
+
+            // Newton's method for f(x) = 1/x - a
+            double temp, r = 4 * (1 - x);
+            for (var i = 0; i < 100; i++, r = temp)
+                if (r == (temp = r * (2 - x * r))) break;
+            return c * r;
+        }
     }
 }

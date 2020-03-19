@@ -123,5 +123,20 @@ namespace UnitTest.Numerics
             Test(3.0);
             Test(127.0);
         }
+
+        [TestMethod]
+        public void Inverse()
+        {
+            void Test(double x) => AssertNearlyEqual(1 / x, ElementaryFunctions.Inverse(x));
+
+            Test(1.0);
+            Test(0.001);
+            Test(0.15);
+            Test(0.2);
+            Test(3.0);
+            Test(7.0);
+            Test(256.0);
+            Test(12345);
+        }
     }
 }

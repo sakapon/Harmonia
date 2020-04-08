@@ -73,7 +73,7 @@ namespace UnitTest.Numerics
 			void Test(long n)
 			{
 				var actual = Primes.Factorize(n);
-				Console.WriteLine(string.Join(" ", actual));
+				Console.WriteLine($"{n} = {string.Join(" * ", actual)}");
 				Assert.AreEqual(n, actual.Aggregate(1L, (x, y) => x * y));
 			}
 		}

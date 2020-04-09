@@ -7,11 +7,11 @@ namespace Harmonia.Numerics
 	{
 		#region Euclidean
 
-		public static int Gcd(int x, int y) { for (int r; (r = x % y) > 0; x = y, y = r) ; return y; }
-		public static int Lcm(int x, int y) => x / Gcd(x, y) * y;
+		public static int Gcd(int a, int b) { for (int r; (r = a % b) > 0; a = b, b = r) ; return b; }
+		public static int Lcm(int a, int b) => a / Gcd(a, b) * b;
 
-		public static long Gcd(long x, long y) { for (long r; (r = x % y) > 0; x = y, y = r) ; return y; }
-		public static long Lcm(long x, long y) => x / Gcd(x, y) * y;
+		public static long Gcd(long a, long b) { for (long r; (r = a % b) > 0; a = b, b = r) ; return b; }
+		public static long Lcm(long a, long b) => a / Gcd(a, b) * b;
 
 		// ax + by = 1 の解
 		// 前提: a と b は互いに素。
@@ -121,17 +121,17 @@ namespace Harmonia.Numerics
 		/// <returns>素数のコレクション。</returns>
 		public static long[] GetPrimes(long m, long M)
 		{
-			// n が大きい場合、誤差が生じる可能性があります。
-			var rn = (int)Math.Ceiling(Math.Sqrt(M));
+			// M が大きい場合、誤差が生じる可能性があります。
+			var rM = (int)Math.Ceiling(Math.Sqrt(M));
 
-			var b1 = new bool[rn + 1];
+			var b1 = new bool[rM + 1];
 			var b2 = new bool[M - m + 1];
 			if (m == 1) b2[0] = true;
 
-			for (long p = 2; p <= rn; ++p)
+			for (long p = 2; p <= rM; ++p)
 				if (!b1[p])
 				{
-					for (var x = p * p; x <= rn; x += p) b1[x] = true;
+					for (var x = p * p; x <= rM; x += p) b1[x] = true;
 					for (var x = Math.Max(p, (m + p - 1) / p) * p; x <= M; x += p) b2[x - m] = true;
 				}
 

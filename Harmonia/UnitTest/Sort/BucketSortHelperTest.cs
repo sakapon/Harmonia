@@ -12,7 +12,7 @@ namespace UnitTest.Sort
 		Random random = new Random();
 
 		[TestMethod]
-		public void Sort_Int()
+		public void BucketSort_Int()
 		{
 			var n = 300000;
 			var a = Enumerable.Range(0, n).Select(_ => random.Next(n)).ToArray();
@@ -26,7 +26,7 @@ namespace UnitTest.Sort
 
 		// 最大値が小さいほど速いです。
 		[TestMethod]
-		public void Sort_IntNorm()
+		public void BucketSort_IntNorm()
 		{
 			int next() => random.Next(-10000, 10000);
 			int norm((int x, int y) v) => (int)Math.Sqrt(v.x * v.x + v.y * v.y);

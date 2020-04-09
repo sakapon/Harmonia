@@ -13,7 +13,7 @@ namespace UnitTest.Sort
 		int[] CreateData() => Enumerable.Range(0, 300000).Select(i => random.Next(300000)).ToArray();
 
 		[TestMethod]
-		public void SortTake_Asc()
+		public void HeapSort_Asc()
 		{
 			var values = CreateData();
 			var actual = TestHelper.MeasureTime(() => values.HeapSort().Take(1000).ToArray());
@@ -22,7 +22,7 @@ namespace UnitTest.Sort
 		}
 
 		[TestMethod]
-		public void SortTake_Desc()
+		public void HeapSort_Desc()
 		{
 			var values = CreateData();
 			var actual = TestHelper.MeasureTime(() => values.HeapSort(true).Take(1000).ToArray());
@@ -31,7 +31,7 @@ namespace UnitTest.Sort
 		}
 
 		[TestMethod]
-		public void SortTake_Key_Asc()
+		public void HeapSort_Key_Asc()
 		{
 			var values = CreateData();
 			var actual = TestHelper.MeasureTime(() => values.HeapSort(x => x.ToString()).Take(1000).ToArray());
@@ -40,7 +40,7 @@ namespace UnitTest.Sort
 		}
 
 		[TestMethod]
-		public void SortTake_Key_Desc()
+		public void HeapSort_Key_Desc()
 		{
 			var values = CreateData();
 			var actual = TestHelper.MeasureTime(() => values.HeapSort(x => x.ToString(), true).Take(1000).ToArray());

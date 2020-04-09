@@ -12,7 +12,7 @@ namespace UnitTest.Sort
 		Random random = new Random();
 
 		[TestMethod]
-		public void Sort_Int32()
+		public void RadixSort_Int32()
 		{
 			var n = 300000;
 			var a = Enumerable.Range(0, n).Select(_ => random.Next(int.MinValue, int.MaxValue)).ToArray();
@@ -25,7 +25,7 @@ namespace UnitTest.Sort
 		}
 
 		[TestMethod]
-		public void Sort_Int64()
+		public void RadixSort_Int64()
 		{
 			var n = 300000;
 			var a = Enumerable.Range(0, n).Select(_ => (long)random.Next(int.MinValue, int.MaxValue) * random.Next(int.MinValue, int.MaxValue)).ToArray();

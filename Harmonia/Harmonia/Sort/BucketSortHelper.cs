@@ -22,17 +22,17 @@ namespace Harmonia.Sort
 
 		// 値の範囲は [0, max]
 		// O(n + max)
-		public static void BucketSort<T>(this T[] source, Func<T, int> keySelector, int max)
+		public static void BucketSort<TSource>(this TSource[] source, Func<TSource, int> keySelector, int max)
 		{
 			if (source == null) throw new ArgumentNullException(nameof(source));
 			if (keySelector == null) throw new ArgumentNullException(nameof(keySelector));
 			if (max < 0) throw new ArgumentOutOfRangeException(nameof(max));
 
-			var b = new List<T>[max + 1];
+			var b = new List<TSource>[max + 1];
 
 			int key;
 			foreach (var o in source)
-				if (b[key = keySelector(o)] == null) b[key] = new List<T> { o };
+				if (b[key = keySelector(o)] == null) b[key] = new List<TSource> { o };
 				else b[key].Add(o);
 
 			var i = -1;

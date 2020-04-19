@@ -28,5 +28,23 @@ namespace Harmonia.Numerics
             var r = Math.Sqrt(x);
             return Math.Round(r) == r;
         }
+
+        public static long Pow(long b, long i)
+        {
+            for (var r = 1L; ; b *= b)
+            {
+                if (i % 2 > 0) r *= b;
+                if ((i /= 2) < 1) return r;
+            }
+        }
+
+        public static double Pow(double b, long i)
+        {
+            for (var r = 1.0; ; b *= b)
+            {
+                if (i % 2 > 0) r *= b;
+                if ((i /= 2) < 1) return r;
+            }
+        }
     }
 }

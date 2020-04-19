@@ -42,5 +42,12 @@ namespace UnitTest.Numerics
             Assert.AreEqual(true, Numbers.IsSquareNumber(4));
             Assert.AreEqual(false, Numbers.IsSquareNumber(5));
         }
+
+        [TestMethod]
+        public void Pow_Double()
+        {
+            Assert.AreEqual(Math.Pow(1.1, 7), Numbers.Pow(1.1, 7));
+            TestHelper.AssertNearlyEqual(Math.Pow(1.08, 20), Numbers.Pow(1.08, 20));
+        }
     }
 }

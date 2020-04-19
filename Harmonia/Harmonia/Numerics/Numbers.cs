@@ -55,5 +55,13 @@ namespace Harmonia.Numerics
                 if ((i >>= 1) == 0) return r;
             }
         }
+
+        public static double Pow0(double b, long i)
+        {
+            var r = 1.0;
+            for (var j = 1L; j <= i; j <<= 1, b *= b)
+                if ((j & i) != 0) r *= b;
+            return r;
+        }
     }
 }

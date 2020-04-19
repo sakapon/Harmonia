@@ -44,10 +44,29 @@ namespace UnitTest.Numerics
         }
 
         [TestMethod]
+        public void Pow_Long()
+        {
+            Assert.AreEqual(1L << 62, Numbers.Pow(2, 62));
+            Assert.AreEqual((long)Math.Pow(3, 31), Numbers.Pow(3, 31));
+        }
+
+        [TestMethod]
         public void Pow_Double()
         {
             Assert.AreEqual(Math.Pow(1.1, 7), Numbers.Pow(1.1, 7));
             TestHelper.AssertNearlyEqual(Math.Pow(1.08, 20), Numbers.Pow(1.08, 20));
+            // e
+            TestHelper.AssertNearlyEqual(Math.Pow(1.000001, 1000000), Numbers.Pow(1.000001, 1000000));
+        }
+
+        [TestMethod]
+        public void Pow_Decimal()
+        {
+            Assert.AreEqual(Math.Pow(1.2, 4), (double)Numbers.Pow(1.2m, 4));
+            TestHelper.AssertNearlyEqual(Math.Pow(1.1, 7), (double)Numbers.Pow(1.1m, 7));
+            TestHelper.AssertNearlyEqual(Math.Pow(1.08, 20), (double)Numbers.Pow(1.08m, 20));
+            // e
+            TestHelper.AssertNearlyEqual(Math.Pow(1.000001, 1000000), (double)Numbers.Pow(1.000001m, 1000000));
         }
     }
 }

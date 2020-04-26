@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Harmonia.Numerics;
+using KLibrary.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTest.Numerics
@@ -131,7 +132,7 @@ namespace UnitTest.Numerics
 
 			void Test(int n, int expected)
 			{
-				var actual = TestHelper.MeasureTime(() => Primes.GetPrimes(n));
+				var actual = TimeHelper.Measure(() => Primes.GetPrimes(n));
 				Assert.AreEqual(expected, actual.Length);
 			}
 		}
@@ -144,7 +145,7 @@ namespace UnitTest.Numerics
 			Console.WriteLine(string.Join(" ", Primes.GetPrimes(1000000000000, 1000000001000)));
 			Assert.AreEqual(1000, Primes.GetPrimes(22801763489, 22801787296).Length);
 
-			var actual = TestHelper.MeasureTime(() => Primes.GetPrimes(1000000000000, 1000001000000));
+			var actual = TimeHelper.Measure(() => Primes.GetPrimes(1000000000000, 1000001000000));
 			Console.WriteLine(actual.Length);
 		}
 

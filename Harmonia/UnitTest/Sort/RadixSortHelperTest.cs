@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Harmonia.Sort;
+using KLibrary.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTest.Sort
@@ -19,8 +20,8 @@ namespace UnitTest.Sort
 
 			var a1 = (int[])a.Clone();
 			var e1 = (int[])a.Clone();
-			TestHelper.MeasureTime(() => RadixSortHelper.RadixSort(a1));
-			TestHelper.MeasureTime(() => Array.Sort(e1));
+			TimeHelper.Measure(() => RadixSortHelper.RadixSort(a1));
+			TimeHelper.Measure(() => Array.Sort(e1));
 			CollectionAssert.AreEqual(e1, a1);
 		}
 
@@ -32,8 +33,8 @@ namespace UnitTest.Sort
 
 			var a1 = (long[])a.Clone();
 			var e1 = (long[])a.Clone();
-			TestHelper.MeasureTime(() => RadixSortHelper.RadixSort(a1));
-			TestHelper.MeasureTime(() => Array.Sort(e1));
+			TimeHelper.Measure(() => RadixSortHelper.RadixSort(a1));
+			TimeHelper.Measure(() => Array.Sort(e1));
 			CollectionAssert.AreEqual(e1, a1);
 		}
 	}

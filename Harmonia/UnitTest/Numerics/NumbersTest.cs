@@ -1,5 +1,6 @@
 ﻿using System;
 using Harmonia.Numerics;
+using KLibrary.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTest.Numerics
@@ -54,19 +55,19 @@ namespace UnitTest.Numerics
         public void Pow_Double()
         {
             Assert.AreEqual(Math.Pow(1.1, 7), Numbers.Pow(1.1, 7));
-            TestHelper.AssertNearlyEqual(Math.Pow(1.08, 20), Numbers.Pow(1.08, 20));
+            Assert2.AreNearlyEqual(Math.Pow(1.08, 20), Numbers.Pow(1.08, 20));
             // e
-            TestHelper.AssertNearlyEqual(Math.Pow(1.000001, 1000000), Numbers.Pow(1.000001, 1000000));
+            Assert2.AreNearlyEqual(Math.Pow(1.000001, 1000000), Numbers.Pow(1.000001, 1000000), -10);
         }
 
         [TestMethod]
         public void Pow_Decimal()
         {
             Assert.AreEqual(Math.Pow(1.2, 4), (double)Numbers.Pow(1.2m, 4));
-            TestHelper.AssertNearlyEqual(Math.Pow(1.1, 7), (double)Numbers.Pow(1.1m, 7));
-            TestHelper.AssertNearlyEqual(Math.Pow(1.08, 20), (double)Numbers.Pow(1.08m, 20));
+            Assert2.AreNearlyEqual(Math.Pow(1.1, 7), (double)Numbers.Pow(1.1m, 7));
+            Assert2.AreNearlyEqual(Math.Pow(1.08, 20), (double)Numbers.Pow(1.08m, 20));
             // e
-            TestHelper.AssertNearlyEqual(Math.Pow(1.000001, 1000000), (double)Numbers.Pow(1.000001m, 1000000));
+            Assert2.AreNearlyEqual(Math.Pow(1.000001, 1000000), (double)Numbers.Pow(1.000001m, 1000000), -9);
         }
     }
 }

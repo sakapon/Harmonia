@@ -1,5 +1,6 @@
 ﻿using System;
 using Harmonia.Numerics;
+using KLibrary.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTest.Numerics
@@ -7,19 +8,16 @@ namespace UnitTest.Numerics
     [TestClass]
     public class ElementaryFunctionsTest
     {
-        static void AssertNearlyEqual(double expected, double actual) =>
-            Assert.AreEqual(0.0, Math.Round(expected - actual, 12));
+        [TestMethod]
+        public void GetPi() => Assert2.AreNearlyEqual(Math.PI, ElementaryFunctions.GetPi());
 
         [TestMethod]
-        public void GetPi() => AssertNearlyEqual(Math.PI, ElementaryFunctions.GetPi());
-
-        [TestMethod]
-        public void GetE() => AssertNearlyEqual(Math.E, ElementaryFunctions.GetE());
+        public void GetE() => Assert2.AreNearlyEqual(Math.E, ElementaryFunctions.GetE());
 
         [TestMethod]
         public void Sin()
         {
-            void Test(double expected, double x) => AssertNearlyEqual(expected, ElementaryFunctions.Sin(x));
+            void Test(double expected, double x) => Assert2.AreNearlyEqual(expected, ElementaryFunctions.Sin(x));
 
             Test(1.0, Math.PI / 2);
             Test(Math.Sqrt(3) / 2, Math.PI / 3);
@@ -37,7 +35,7 @@ namespace UnitTest.Numerics
         [TestMethod]
         public void Cos()
         {
-            void Test(double expected, double x) => AssertNearlyEqual(expected, ElementaryFunctions.Cos(x));
+            void Test(double expected, double x) => Assert2.AreNearlyEqual(expected, ElementaryFunctions.Cos(x));
 
             Test(1.0, 0);
             Test(Math.Sqrt(3) / 2, Math.PI / 6);
@@ -55,7 +53,7 @@ namespace UnitTest.Numerics
         [TestMethod]
         public void Tan()
         {
-            void Test(double expected, double x) => AssertNearlyEqual(expected, ElementaryFunctions.Tan(x));
+            void Test(double expected, double x) => Assert2.AreNearlyEqual(expected, ElementaryFunctions.Tan(x));
 
             Test(Math.Sqrt(3), Math.PI / 3);
             Test(1.0, Math.PI / 4);
@@ -71,7 +69,7 @@ namespace UnitTest.Numerics
         [TestMethod]
         public void Exp()
         {
-            void Test(double x) => AssertNearlyEqual(Math.Exp(x), ElementaryFunctions.Exp(x));
+            void Test(double x) => Assert2.AreNearlyEqual(Math.Exp(x), ElementaryFunctions.Exp(x));
 
             Test(1.0);
             Test(-1.0);
@@ -83,7 +81,7 @@ namespace UnitTest.Numerics
         [TestMethod]
         public void Log()
         {
-            void Test(double x) => AssertNearlyEqual(Math.Log(x), ElementaryFunctions.Log(x));
+            void Test(double x) => Assert2.AreNearlyEqual(Math.Log(x), ElementaryFunctions.Log(x));
 
             Test(1.0);
             Test(2.0);
@@ -95,7 +93,7 @@ namespace UnitTest.Numerics
         [TestMethod]
         public void Pow()
         {
-            void Test(double x, double p) => AssertNearlyEqual(Math.Pow(x, p), ElementaryFunctions.Pow(x, p));
+            void Test(double x, double p) => Assert2.AreNearlyEqual(Math.Pow(x, p), ElementaryFunctions.Pow(x, p));
 
             Test(2.0, 3.0);
             Test(2.0, 0.5);
@@ -105,7 +103,7 @@ namespace UnitTest.Numerics
         [TestMethod]
         public void Sqrt()
         {
-            void Test(double x) => AssertNearlyEqual(Math.Sqrt(x), ElementaryFunctions.Sqrt(x));
+            void Test(double x) => Assert2.AreNearlyEqual(Math.Sqrt(x), ElementaryFunctions.Sqrt(x));
 
             Test(1.0);
             Test(2.0);
@@ -116,7 +114,7 @@ namespace UnitTest.Numerics
         [TestMethod]
         public void Cbrt()
         {
-            void Test(double x) => AssertNearlyEqual(Math.Pow(x, 1.0 / 3), ElementaryFunctions.Cbrt(x));
+            void Test(double x) => Assert2.AreNearlyEqual(Math.Pow(x, 1.0 / 3), ElementaryFunctions.Cbrt(x));
 
             Test(1.0);
             Test(2.0);
@@ -127,7 +125,7 @@ namespace UnitTest.Numerics
         [TestMethod]
         public void Inverse()
         {
-            void Test(double x) => AssertNearlyEqual(1 / x, ElementaryFunctions.Inverse(x));
+            void Test(double x) => Assert2.AreNearlyEqual(1 / x, ElementaryFunctions.Inverse(x));
 
             Test(1.0);
             Test(0.001);

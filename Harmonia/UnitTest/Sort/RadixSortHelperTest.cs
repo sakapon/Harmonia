@@ -10,13 +10,11 @@ namespace UnitTest.Sort
 	[TestClass]
 	public class RadixSortHelperTest
 	{
-		Random random = new Random();
-
 		[TestMethod]
 		public void RadixSort_Int32()
 		{
 			var n = 300000;
-			var a = Enumerable.Range(0, n).Select(_ => random.Next(int.MinValue, int.MaxValue)).ToArray();
+			var a = RandomHelper.CreateData(n, int.MinValue, int.MaxValue);
 
 			var a1 = (int[])a.Clone();
 			var e1 = (int[])a.Clone();
@@ -28,8 +26,10 @@ namespace UnitTest.Sort
 		[TestMethod]
 		public void RadixSort_Int64()
 		{
+			int next() => RandomHelper.Random.Next(int.MinValue, int.MaxValue);
+
 			var n = 300000;
-			var a = Enumerable.Range(0, n).Select(_ => (long)random.Next(int.MinValue, int.MaxValue) * random.Next(int.MinValue, int.MaxValue)).ToArray();
+			var a = Enumerable.Range(0, n).Select(_ => (long)next() * next()).ToArray();
 
 			var a1 = (long[])a.Clone();
 			var e1 = (long[])a.Clone();

@@ -10,8 +10,6 @@ namespace UnitTest.Search
 	[TestClass]
 	public class BinarySearchTest
 	{
-		static readonly Random random = new Random();
-
 		[TestMethod]
 		public void FirstGt_Random()
 		{
@@ -23,7 +21,7 @@ namespace UnitTest.Search
 
 			void Test(int n)
 			{
-				var a = Enumerable.Range(0, n).Select(_ => random.Next(0, n)).OrderBy(x => x).ToArray();
+				var a = RandomHelper.CreateData(n).OrderBy(x => x).ToArray();
 				for (int x = -2; x < n + 2; x++)
 				{
 					var actual = BinarySearch.First(0, n, i => a[i] > x);
@@ -44,7 +42,7 @@ namespace UnitTest.Search
 
 			void Test(int n)
 			{
-				var a = Enumerable.Range(0, n).Select(_ => random.Next(0, n)).OrderBy(x => -x).ToArray();
+				var a = RandomHelper.CreateData(n).OrderBy(x => -x).ToArray();
 				for (int x = -2; x < n + 2; x++)
 				{
 					var actual = BinarySearch.Last(-1, n - 1, i => a[i] > x);

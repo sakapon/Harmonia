@@ -10,12 +10,10 @@ namespace UnitTest.Trees
 	[TestClass]
 	public class Heap1Test
 	{
-		Random random = new Random();
-
 		[TestMethod]
 		public void Sort()
 		{
-			var values = Enumerable.Range(0, 100000).Select(i => random.Next(100000)).ToArray();
+			var values = RandomHelper.CreateData(100000);
 			var actual = TimeHelper.Measure(() => Heap1.Create(values));
 			var a = new int[values.Length];
 			TimeHelper.Measure(() => { for (var i = 0; i < a.Length; i++) a[i] = actual.Pop(); });
@@ -27,7 +25,7 @@ namespace UnitTest.Trees
 		[TestMethod]
 		public void SortDescending()
 		{
-			var values = Enumerable.Range(0, 100000).Select(i => random.Next(100000)).ToArray();
+			var values = RandomHelper.CreateData(100000);
 			var actual = TimeHelper.Measure(() => Heap1.Create(values, true));
 			var a = new int[values.Length];
 			TimeHelper.Measure(() => { for (var i = 0; i < a.Length; i++, actual.Pop()) a[i] = actual.First; });
@@ -38,7 +36,7 @@ namespace UnitTest.Trees
 		[TestMethod]
 		public void SortDescending_String()
 		{
-			var values = Enumerable.Range(0, 100000).Select(i => random.Next(100000)).ToArray();
+			var values = RandomHelper.CreateData(100000);
 			var actual = TimeHelper.Measure(() => Heap1.Create(x => x.ToString(), values, true));
 			var a = new List<int>();
 			TimeHelper.Measure(() => { while (actual.Any) a.Add(actual.Pop()); });

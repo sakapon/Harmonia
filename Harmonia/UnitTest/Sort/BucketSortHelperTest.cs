@@ -10,13 +10,11 @@ namespace UnitTest.Sort
 	[TestClass]
 	public class BucketSortHelperTest
 	{
-		Random random = new Random();
-
 		[TestMethod]
 		public void BucketSort_Int()
 		{
 			var n = 300000;
-			var a = Enumerable.Range(0, n).Select(_ => random.Next(n)).ToArray();
+			var a = RandomHelper.CreateData(n);
 
 			var a1 = (int[])a.Clone();
 			var e1 = (int[])a.Clone();
@@ -29,7 +27,7 @@ namespace UnitTest.Sort
 		[TestMethod]
 		public void BucketSort_IntNorm()
 		{
-			int next() => random.Next(-10000, 10000);
+			int next() => RandomHelper.Random.Next(-10000, 10000);
 			int norm((int x, int y) v) => (int)Math.Sqrt(v.x * v.x + v.y * v.y);
 
 			var n = 300000;

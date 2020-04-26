@@ -40,7 +40,7 @@ namespace UnitTest.Conversion
         {
             void Test(int bytesLength)
             {
-                var bytes = RandomHelper.GenerateBytes(bytesLength);
+                var bytes = RandomHelper2.GenerateBytes(bytesLength);
                 var text = Convert.ToBase64String(bytes);
                 Console.WriteLine(text);
 

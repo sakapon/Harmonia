@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Harmonia.Sort;
+using KLibrary.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTest.Sort
@@ -18,7 +19,7 @@ namespace UnitTest.Sort
             for (var i = 0; i < 10; i++)
             {
                 var comparisons = 0;
-                var target = RandomHelper.ShuffleRange(start, count).ToArray();
+                var target = RandomHelper.ShuffleRange(start, count);
                 target.MergeSort((x1, x2) =>
                 {
                     comparisons++;

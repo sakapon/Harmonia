@@ -63,11 +63,11 @@ namespace UnitTest.Numerics
         [TestMethod]
         public void Pow_Decimal()
         {
-            Assert.AreEqual(Math.Pow(1.2, 4), (double)Numbers.Pow(1.2m, 4));
-            Assert2.AreNearlyEqual(Math.Pow(1.1, 7), (double)Numbers.Pow(1.1m, 7));
-            Assert2.AreNearlyEqual(Math.Pow(1.08, 20), (double)Numbers.Pow(1.08m, 20));
+            Assert.AreEqual((decimal)Math.Pow(1.2, 4), Numbers.Pow(1.2m, 4));
+            Assert2.AreNearlyEqual((decimal)Math.Pow(1.1, 7), Numbers.Pow(1.1m, 7));
+            Assert2.AreNearlyEqual((decimal)Math.Pow(1.08, 20), Numbers.Pow(1.08m, 20));
             // e
-            Assert2.AreNearlyEqual(Math.Pow(1.000001, 1000000), (double)Numbers.Pow(1.000001m, 1000000), -9);
+            Assert2.AreNearlyEqual((decimal)Math.Pow(1.000001, 1000000), Numbers.Pow(1.000001m, 1000000), -9);
         }
     }
 }

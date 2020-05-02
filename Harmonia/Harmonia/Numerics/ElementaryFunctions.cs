@@ -119,6 +119,11 @@ namespace Harmonia.Numerics
             return 2 * sum;
         }
 
+        public static double Log(double x, double b)
+        {
+            return Log(x) / Log(b);
+        }
+
         public static double Pow(double x, double p)
         {
             return Exp(p * Log(x));

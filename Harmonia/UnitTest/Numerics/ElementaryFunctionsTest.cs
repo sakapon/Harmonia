@@ -91,6 +91,20 @@ namespace UnitTest.Numerics
         }
 
         [TestMethod]
+        public void Log_b()
+        {
+            void Test(double x, double b) => Assert2.AreNearlyEqual(Math.Log(x, b), ElementaryFunctions.Log(x, b), -9);
+
+            Test(1.0, 2);
+            Test(2.0, 2);
+            Test(0.5, 2);
+            Test(1.0, 10);
+            Test(2.0, 10);
+            Test(0.5, 10);
+            Test(Math.E, Math.E);
+        }
+
+        [TestMethod]
         public void Pow()
         {
             void Test(double x, double p) => Assert2.AreNearlyEqual(Math.Pow(x, p), ElementaryFunctions.Pow(x, p));

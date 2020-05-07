@@ -9,6 +9,7 @@ namespace Harmonia.Numerics
             var p = 1.0;
             var sum = 1.0;
 
+            // i=63 で終了。
             for (var i = 3; i < 100; i += 2)
             {
                 p *= -3;
@@ -85,6 +86,7 @@ namespace Harmonia.Numerics
             var p = 1.0;
             var sum = 1.0;
 
+            // x=1 のとき、i=18 で終了。
             for (var i = 1; i < 100; i++)
             {
                 c *= i;
@@ -131,7 +133,7 @@ namespace Harmonia.Numerics
 
         public static double Sqrt(double x)
         {
-            var r = x;
+            var r = Math.Max(1, x);
 
             for (var i = 0; i < 100; i++)
             {
@@ -144,7 +146,7 @@ namespace Harmonia.Numerics
 
         public static double Cbrt(double x)
         {
-            var r = x;
+            var r = Math.Max(1, x);
 
             for (var i = 0; i < 100; i++)
             {
@@ -157,15 +159,15 @@ namespace Harmonia.Numerics
 
         public static double Inverse(double x)
         {
-            var c = 1.0;
-            while (x < 0.25) { x *= 2; c *= 2; }
-            while (x > 0.5) { x *= 0.5; c *= 0.5; }
-
             // Newton's method for f(x) = 1/x - a
-            double temp, r = 4 * (1 - x);
+            double temp, r = 1;
+            while (x * r <= 0.25) { r *= 4; }
+            while (x * r > 1) { r *= 0.25; }
+
+            // i=6 程度で終了。
             for (var i = 0; i < 100; i++, r = temp)
                 if (r == (temp = r * (2 - x * r))) break;
-            return c * r;
+            return r;
         }
     }
 }

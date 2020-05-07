@@ -71,6 +71,7 @@ namespace UnitTest.Numerics
         {
             void Test(double x) => Assert2.AreNearlyEqual(Math.Exp(x), ElementaryFunctions.Exp(x));
 
+            // x=0 から離れるほど誤差が大きくなります。
             Test(1.0);
             Test(-1.0);
             Test(0.5);
@@ -83,6 +84,7 @@ namespace UnitTest.Numerics
         {
             void Test(double x) => Assert2.AreNearlyEqual(Math.Log(x), ElementaryFunctions.Log(x));
 
+            // x=1 から離れるほど誤差が大きくなります。
             Test(1.0);
             Test(2.0);
             Test(3.0);
@@ -123,6 +125,9 @@ namespace UnitTest.Numerics
             Test(2.0);
             Test(3.0);
             Test(127.0);
+            Test(123456789);
+            Test(0.00000001);
+            Test(0.000000001);
         }
 
         [TestMethod]
@@ -134,6 +139,9 @@ namespace UnitTest.Numerics
             Test(2.0);
             Test(3.0);
             Test(127.0);
+            Test(123456789);
+            Test(0.00000001);
+            Test(0.000000001);
         }
 
         [TestMethod]
@@ -143,6 +151,7 @@ namespace UnitTest.Numerics
 
             Test(1.0);
             Test(0.001);
+            Test(0.00081);
             Test(0.15);
             Test(0.2);
             Test(3.0);

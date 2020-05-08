@@ -159,5 +159,16 @@ namespace UnitTest.Numerics
             Test(256.0);
             Test(12345);
         }
+
+        [TestMethod]
+        public void Multiply_Byte()
+        {
+            var Test = TestHelper.CreateAreEqual<byte, byte, byte>(ElementaryFunctions.Multiply);
+
+            Test(6, 5, 30);
+            Test(15, 17, 255);
+            Test(8, 32, 0);
+            Test(51, 53, 143);
+        }
     }
 }

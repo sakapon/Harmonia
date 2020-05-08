@@ -169,5 +169,21 @@ namespace Harmonia.Numerics
                 if (r == (temp = r * (2 - x * r))) break;
             return r;
         }
+
+        public static byte Multiply(byte x, byte y)
+        {
+            byte r = 0;
+            for (; x != 0; x >>= 1, y <<= 1)
+                if ((x & 1) != 0) r += y;
+            return r;
+        }
+
+        public static uint Multiply(uint x, uint y)
+        {
+            var r = 0U;
+            for (; x != 0; x >>= 1, y <<= 1)
+                if ((x & 1) != 0) r += y;
+            return r;
+        }
     }
 }

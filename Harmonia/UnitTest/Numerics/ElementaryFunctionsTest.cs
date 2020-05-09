@@ -163,12 +163,12 @@ namespace UnitTest.Numerics
         [TestMethod]
         public void Multiply_Byte()
         {
-            var Test = TestHelper.CreateAreEqual<byte, byte, byte>(ElementaryFunctions.Multiply);
+            void Test(byte x, byte y) => Assert.AreEqual((byte)(x * y), ElementaryFunctions.Multiply(x, y));
 
-            Test(6, 5, 30);
-            Test(15, 17, 255);
-            Test(8, 32, 0);
-            Test(51, 53, 143);
+            Test(6, 5);
+            Test(15, 17);
+            Test(8, 32);
+            Test(51, 53);
         }
 
         [TestMethod]

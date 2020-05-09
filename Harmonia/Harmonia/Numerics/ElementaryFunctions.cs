@@ -170,6 +170,13 @@ namespace Harmonia.Numerics
             return r;
         }
 
+        public static int Add(int x, int y)
+        {
+            var r = x ^ y;
+            var t = (x & y) << 1;
+            return t == 0 ? r : Add(r, t);
+        }
+
         // unsigned
         public static byte Multiply(byte x, byte y)
         {

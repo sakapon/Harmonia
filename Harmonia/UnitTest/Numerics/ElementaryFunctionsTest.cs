@@ -170,5 +170,19 @@ namespace UnitTest.Numerics
             Test(8, 32, 0);
             Test(51, 53, 143);
         }
+
+        [TestMethod]
+        public void Multiply_Int32()
+        {
+            void Test(int x, int y) => Assert.AreEqual(x * y, ElementaryFunctions.Multiply(x, y));
+
+            Test(6, 5);
+            Test(15, 17);
+            Test(-3, 5);
+            Test(3, -5);
+            Test(-3, -5);
+            Test(8, int.MaxValue);
+            Test(0x10000000, -4);
+        }
     }
 }

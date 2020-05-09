@@ -170,19 +170,21 @@ namespace Harmonia.Numerics
             return r;
         }
 
+        // unsigned
         public static byte Multiply(byte x, byte y)
         {
             byte r = 0;
-            for (; x != 0; x >>= 1, y <<= 1)
-                if ((x & 1) != 0) r += y;
+            for (; x != 0 && y != 0; x <<= 1, y >>= 1)
+                if ((y & 1) != 0) r += x;
             return r;
         }
 
-        public static uint Multiply(uint x, uint y)
+        // signed
+        public static int Multiply(int x, int y)
         {
-            var r = 0U;
-            for (; x != 0; x >>= 1, y <<= 1)
-                if ((x & 1) != 0) r += y;
+            var r = 0;
+            for (; x != 0 && y != 0; x <<= 1, y >>= 1)
+                if ((y & 1) != 0) r += x;
             return r;
         }
     }

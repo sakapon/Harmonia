@@ -175,6 +175,20 @@ namespace UnitTest.Numerics
         }
 
         [TestMethod]
+        public void Subtract_Int32()
+        {
+            void Test(int x, int y) => Assert.AreEqual(x - y, ElementaryFunctions.Subtract(x, y));
+
+            Test(6, 9);
+            Test(5, 3);
+            Test(-3, 5);
+            Test(3, -5);
+            Test(-3, -5);
+            Test(0xFFFF, -1);
+            Test(8, int.MaxValue);
+        }
+
+        [TestMethod]
         public void Multiply_Byte()
         {
             void Test(byte x, byte y) => Assert.AreEqual((byte)(x * y), ElementaryFunctions.Multiply(x, y));

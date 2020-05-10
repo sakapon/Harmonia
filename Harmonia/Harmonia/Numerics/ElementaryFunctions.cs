@@ -177,6 +177,11 @@ namespace Harmonia.Numerics
             return t == 0 ? r : Add(r, t);
         }
 
+        public static int Subtract(int x, int y)
+        {
+            return Add(x, Add(~y, 1));
+        }
+
         // unsigned
         public static byte Multiply(byte x, byte y)
         {

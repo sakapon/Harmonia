@@ -159,58 +159,5 @@ namespace UnitTest.Numerics
             Test(256.0);
             Test(12345);
         }
-
-        [TestMethod]
-        public void Add_Int32()
-        {
-            void Test(int x, int y) => Assert.AreEqual(x + y, ElementaryFunctions.Add(x, y));
-
-            Test(6, 9);
-            Test(15, 17);
-            Test(-3, 5);
-            Test(3, -5);
-            Test(-3, -5);
-            Test(0xFFFF, 1);
-            Test(8, int.MaxValue);
-        }
-
-        [TestMethod]
-        public void Subtract_Int32()
-        {
-            void Test(int x, int y) => Assert.AreEqual(x - y, ElementaryFunctions.Subtract(x, y));
-
-            Test(6, 9);
-            Test(5, 3);
-            Test(-3, 5);
-            Test(3, -5);
-            Test(-3, -5);
-            Test(0xFFFF, -1);
-            Test(8, int.MaxValue);
-        }
-
-        [TestMethod]
-        public void Multiply_Byte()
-        {
-            void Test(byte x, byte y) => Assert.AreEqual((byte)(x * y), ElementaryFunctions.Multiply(x, y));
-
-            Test(6, 5);
-            Test(15, 17);
-            Test(8, 32);
-            Test(51, 53);
-        }
-
-        [TestMethod]
-        public void Multiply_Int32()
-        {
-            void Test(int x, int y) => Assert.AreEqual(x * y, ElementaryFunctions.Multiply(x, y));
-
-            Test(6, 5);
-            Test(15, 17);
-            Test(-3, 5);
-            Test(3, -5);
-            Test(-3, -5);
-            Test(8, int.MaxValue);
-            Test(0x10000000, -4);
-        }
     }
 }

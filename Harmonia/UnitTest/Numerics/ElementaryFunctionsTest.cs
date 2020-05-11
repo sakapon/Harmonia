@@ -71,6 +71,7 @@ namespace UnitTest.Numerics
         {
             void Test(double x) => Assert2.AreNearlyEqual(Math.Exp(x), ElementaryFunctions.Exp(x));
 
+            // x=0 から離れるほど誤差が大きくなります。
             Test(1.0);
             Test(-1.0);
             Test(0.5);
@@ -83,11 +84,26 @@ namespace UnitTest.Numerics
         {
             void Test(double x) => Assert2.AreNearlyEqual(Math.Log(x), ElementaryFunctions.Log(x));
 
+            // x=1 から離れるほど誤差が大きくなります。
             Test(1.0);
             Test(2.0);
             Test(3.0);
             Test(0.5);
             Test(Math.E);
+        }
+
+        [TestMethod]
+        public void Log_b()
+        {
+            void Test(double x, double b) => Assert2.AreNearlyEqual(Math.Log(x, b), ElementaryFunctions.Log(x, b), -9);
+
+            Test(1.0, 2);
+            Test(2.0, 2);
+            Test(0.5, 2);
+            Test(1.0, 10);
+            Test(2.0, 10);
+            Test(0.5, 10);
+            Test(Math.E, Math.E);
         }
 
         [TestMethod]
@@ -109,6 +125,9 @@ namespace UnitTest.Numerics
             Test(2.0);
             Test(3.0);
             Test(127.0);
+            Test(123456789);
+            Test(0.00000001);
+            Test(0.000000001);
         }
 
         [TestMethod]
@@ -120,6 +139,9 @@ namespace UnitTest.Numerics
             Test(2.0);
             Test(3.0);
             Test(127.0);
+            Test(123456789);
+            Test(0.00000001);
+            Test(0.000000001);
         }
 
         [TestMethod]
@@ -129,12 +151,66 @@ namespace UnitTest.Numerics
 
             Test(1.0);
             Test(0.001);
+            Test(0.00081);
             Test(0.15);
             Test(0.2);
             Test(3.0);
             Test(7.0);
             Test(256.0);
             Test(12345);
+        }
+
+        [TestMethod]
+        public void Add_Int32()
+        {
+            void Test(int x, int y) => Assert.AreEqual(x + y, ElementaryFunctions.Add(x, y));
+
+            Test(6, 9);
+            Test(15, 17);
+            Test(-3, 5);
+            Test(3, -5);
+            Test(-3, -5);
+            Test(0xFFFF, 1);
+            Test(8, int.MaxValue);
+        }
+
+        [TestMethod]
+        public void Subtract_Int32()
+        {
+            void Test(int x, int y) => Assert.AreEqual(x - y, ElementaryFunctions.Subtract(x, y));
+
+            Test(6, 9);
+            Test(5, 3);
+            Test(-3, 5);
+            Test(3, -5);
+            Test(-3, -5);
+            Test(0xFFFF, -1);
+            Test(8, int.MaxValue);
+        }
+
+        [TestMethod]
+        public void Multiply_Byte()
+        {
+            void Test(byte x, byte y) => Assert.AreEqual((byte)(x * y), ElementaryFunctions.Multiply(x, y));
+
+            Test(6, 5);
+            Test(15, 17);
+            Test(8, 32);
+            Test(51, 53);
+        }
+
+        [TestMethod]
+        public void Multiply_Int32()
+        {
+            void Test(int x, int y) => Assert.AreEqual(x * y, ElementaryFunctions.Multiply(x, y));
+
+            Test(6, 5);
+            Test(15, 17);
+            Test(-3, 5);
+            Test(3, -5);
+            Test(-3, -5);
+            Test(8, int.MaxValue);
+            Test(0x10000000, -4);
         }
     }
 }

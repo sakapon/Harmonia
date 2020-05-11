@@ -41,15 +41,16 @@ namespace Harmonia.Numerics
 		public static (int q, int r) Divide(int x, int y)
 		{
 			if (y == 0) throw new DivideByZeroException();
+
 			var (s, t) = ForPositive(Abs(x), Abs(y));
-			return (x > 0 == y > 0 ? s : Negate(s), x > 0 ? t : Negate(t));
+			return (x >= 0 == y > 0 ? s : Negate(s), x >= 0 ? t : Negate(t));
 
 			(int, int) ForPositive(int a, int b)
 			{
 				int q = 0, f = 1;
-				for (; (b & 0x40000000) == 0; b <<= 1, f <<= 1) ;
+				for (; a > b && (b & 0x40000000) == 0; b <<= 1, f <<= 1) ;
 				for (; a != 0 && f != 0; b >>= 1, f >>= 1)
-					if (a >= b) { a -= b; q |= f; }
+					if (a >= b) { a = Subtract(a, b); q |= f; }
 				return (q, a);
 			}
 		}

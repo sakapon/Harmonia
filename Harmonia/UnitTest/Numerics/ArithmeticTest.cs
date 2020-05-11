@@ -39,24 +39,27 @@ namespace UnitTest.Numerics
 		{
 			void Test(byte x, byte y) => Assert.AreEqual((byte)(x * y), Arithmetic.Multiply(x, y));
 
-			Test(6, 5);
-			Test(15, 17);
-			Test(8, 32);
-			Test(51, 53);
+			Test(0, 123);
+			Test(1, 123);
+			Test(123, 0);
+			Test(123, 1);
+
+			for (int i = 0; i < 1000; i++)
+				Test((byte)NextInt32(), (byte)NextInt32());
 		}
 
 		[TestMethod]
-		public void Multiply_Int32()
+		public void Multiply()
 		{
 			void Test(int x, int y) => Assert.AreEqual(x * y, Arithmetic.Multiply(x, y));
 
-			Test(6, 5);
-			Test(15, 17);
-			Test(-3, 5);
-			Test(3, -5);
-			Test(-3, -5);
-			Test(8, int.MaxValue);
-			Test(0x10000000, -4);
+			Test(0, 123);
+			Test(1, 123);
+			Test(123, 0);
+			Test(123, 1);
+
+			for (int i = 0; i < 1000; i++)
+				Test(NextInt32(), NextInt32());
 		}
 
 		[TestMethod]

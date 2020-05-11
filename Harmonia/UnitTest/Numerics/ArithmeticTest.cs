@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Harmonia.Numerics;
 using KLibrary.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,32 +8,30 @@ namespace UnitTest.Numerics
 	[TestClass]
 	public class ArithmeticTest
 	{
+		static int NextInt32() => RandomHelper.Random.Next(int.MinValue, int.MaxValue);
+
 		[TestMethod]
-		public void Add_Int32()
+		public void Add()
 		{
 			void Test(int x, int y) => Assert.AreEqual(x + y, Arithmetic.Add(x, y));
 
-			Test(6, 9);
-			Test(15, 17);
-			Test(-3, 5);
-			Test(3, -5);
-			Test(-3, -5);
-			Test(0xFFFF, 1);
-			Test(8, int.MaxValue);
+			Test(0, 123);
+			Test(123, 0);
+
+			for (int i = 0; i < 1000; i++)
+				Test(NextInt32(), NextInt32());
 		}
 
 		[TestMethod]
-		public void Subtract_Int32()
+		public void Subtract()
 		{
 			void Test(int x, int y) => Assert.AreEqual(x - y, Arithmetic.Subtract(x, y));
 
-			Test(6, 9);
-			Test(5, 3);
-			Test(-3, 5);
-			Test(3, -5);
-			Test(-3, -5);
-			Test(0xFFFF, -1);
-			Test(8, int.MaxValue);
+			Test(0, 123);
+			Test(123, 0);
+
+			for (int i = 0; i < 1000; i++)
+				Test(NextInt32(), NextInt32());
 		}
 
 		[TestMethod]
@@ -63,41 +60,38 @@ namespace UnitTest.Numerics
 		}
 
 		[TestMethod]
-		public void Quotient()
+		public void Divide()
 		{
-			void Test(int x, int y) => Assert.AreEqual(x / y, Arithmetic.Quotient(x, y));
+			void Test(int x, int y)
+			{
+				var (q, r) = Arithmetic.Divide(x, y);
+				Assert.AreEqual(x / y, q);
+				Assert.AreEqual(x % y, r);
+			}
 
-			Assert.ThrowsException<DivideByZeroException>(() => Arithmetic.Quotient(123, 0));
-			Test(0, 123);
+			Assert.ThrowsException<DivideByZeroException>(() => Arithmetic.Divide(123, 0));
 
-			var xs = RandomHelper.CreateData(1000, -1000, 1000);
-			var ys = RandomHelper.CreateData(1000, -1000, 1000);
-			for (int i = 0; i < xs.Length; i++)
-				if (ys[i] != 0) Test(xs[i], ys[i]);
+			for (int i = -100; i <= 100; i++)
+			{
+				Test(i, 30);
+				Test(i, 31);
+				Test(i, -30);
+				Test(i, -31);
 
-			xs = RandomHelper.CreateData(1000, int.MinValue, int.MaxValue);
-			ys = RandomHelper.CreateData(1000, int.MinValue, int.MaxValue);
-			for (int i = 0; i < xs.Length; i++)
-				if (ys[i] != 0) Test(xs[i], ys[i]);
-		}
+				if (i != 0)
+				{
+					Test(30, i);
+					Test(31, i);
+					Test(-30, i);
+					Test(-31, i);
+				}
+			}
 
-		[TestMethod]
-		public void Remainder()
-		{
-			void Test(int x, int y) => Assert.AreEqual(x % y, Arithmetic.Remainder(x, y));
-
-			Assert.ThrowsException<DivideByZeroException>(() => Arithmetic.Remainder(123, 0));
-			Test(0, 123);
-
-			var xs = RandomHelper.CreateData(1000, -1000, 1000);
-			var ys = RandomHelper.CreateData(1000, -1000, 1000);
-			for (int i = 0; i < xs.Length; i++)
-				if (ys[i] != 0) Test(xs[i], ys[i]);
-
-			xs = RandomHelper.CreateData(1000, int.MinValue, int.MaxValue);
-			ys = RandomHelper.CreateData(1000, int.MinValue, int.MaxValue);
-			for (int i = 0; i < xs.Length; i++)
-				if (ys[i] != 0) Test(xs[i], ys[i]);
+			for (int i = 0; i < 1000; i++)
+			{
+				var (x, y) = (NextInt32(), NextInt32());
+				if (y != 0) Test(x, y);
+			}
 		}
 	}
 }

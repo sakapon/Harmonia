@@ -60,5 +60,21 @@ namespace UnitTest.Numerics
 			Test(8, int.MaxValue);
 			Test(0x10000000, -4);
 		}
+
+		[TestMethod]
+		public void Quotient()
+		{
+			void Test(int x, int y) => Assert.AreEqual(x / y, Arithmetic.Quotient(x, y));
+
+			Assert.ThrowsException<DivideByZeroException>(() => Arithmetic.Quotient(123, 0));
+			Test(0, 123);
+			Test(6, 5);
+			Test(15, 17);
+			Test(-3, 5);
+			Test(3, -5);
+			Test(-3, -5);
+			Test(8, int.MaxValue);
+			Test(0x10000000, -4);
+		}
 	}
 }

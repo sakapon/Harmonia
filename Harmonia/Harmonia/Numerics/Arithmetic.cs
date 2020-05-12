@@ -6,16 +6,25 @@ namespace Harmonia.Numerics
 	{
 		public static int Negate(int x) => Add(~x, 1);
 
-		public static int Abs(int x) => x >= 0 ? x : Negate(x);
+		public static int Abs(int x) => (x & int.MinValue) == 0 ? x : Negate(x);
 
 		public static int Add(int x, int y)
 		{
 			var xor = x ^ y;
-			var and = (x & y) << 1;
-			return and == 0 ? xor : Add(xor, and);
+			var up = (x & y) << 1;
+			return up == 0 ? xor : Add(xor, up);
 		}
 
+		public static int Subtract(int x, int y)
+		{
+			var xor = x ^ y;
+			var up = (xor & y) << 1;
+			return up == 0 ? xor : Subtract(xor, up);
+		}
+
+#if Other
 		public static int Subtract(int x, int y) => Add(x, Negate(y));
+#endif
 
 		// unsigned
 		public static byte Multiply(byte x, byte y)

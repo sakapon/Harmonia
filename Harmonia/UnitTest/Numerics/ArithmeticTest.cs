@@ -11,6 +11,19 @@ namespace UnitTest.Numerics
 		static int NextInt32() => RandomHelper.Random.Next(int.MinValue, int.MaxValue);
 
 		[TestMethod]
+		public void LessThan()
+		{
+			void Test(int x, int y) => Assert.AreEqual(x < y, Arithmetic.LessThan(x, y));
+
+			for (int i = -50; i <= 50; i++)
+				for (int j = -50; j <= 50; j++)
+					Test(i, j);
+
+			for (int i = 0; i < 1000; i++)
+				Test(NextInt32(), NextInt32());
+		}
+
+		[TestMethod]
 		public void Add()
 		{
 			void Test(int x, int y) => Assert.AreEqual(x + y, Arithmetic.Add(x, y));

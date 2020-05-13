@@ -8,6 +8,19 @@ namespace Harmonia.Numerics
 
 		public static int Abs(int x) => (x & int.MinValue) == 0 ? x : Negate(x);
 
+		public static bool LessThan(int x, int y)
+		{
+			var nx = (x & int.MinValue) != 0;
+			var ny = (y & int.MinValue) != 0;
+			if (nx ^ ny) return nx;
+			if (nx) return LessThan(Negate(y), Negate(x));
+
+			var xor = x ^ y;
+			for (var f = 1 << 30; f != 0; f >>= 1)
+				if ((xor & f) != 0) return (y & f) != 0;
+			return false;
+		}
+
 		public static int Add(int x, int y)
 		{
 			var xor = x ^ y;

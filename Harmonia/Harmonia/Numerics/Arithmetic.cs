@@ -5,13 +5,17 @@ namespace Harmonia.Numerics
 	public static class Arithmetic
 	{
 		public static int Negate(int x) => Add(~x, 1);
+#if Other
+		public static int Negate(int x) => ~Subtract(x, 1);
+#endif
 
-		public static int Abs(int x) => (x & int.MinValue) == 0 ? x : Negate(x);
+		// 1 << 31 == int.MinValue
+		public static int Abs(int x) => (x & 1 << 31) == 0 ? x : Negate(x);
 
 		public static bool LessThan(int x, int y)
 		{
-			var nx = (x & int.MinValue) != 0;
-			var ny = (y & int.MinValue) != 0;
+			var nx = (x & 1 << 31) != 0;
+			var ny = (y & 1 << 31) != 0;
 			if (nx ^ ny) return nx;
 			if (nx) return LessThan(Negate(y), Negate(x));
 
@@ -24,17 +28,16 @@ namespace Harmonia.Numerics
 		public static int Add(int x, int y)
 		{
 			var xor = x ^ y;
-			var up = (x & y) << 1;
-			return up == 0 ? xor : Add(xor, up);
+			var carry = (x & y) << 1;
+			return carry == 0 ? xor : Add(xor, carry);
 		}
 
 		public static int Subtract(int x, int y)
 		{
 			var xor = x ^ y;
-			var up = (xor & y) << 1;
-			return up == 0 ? xor : Subtract(xor, up);
+			var carry = (xor & y) << 1;
+			return carry == 0 ? xor : Subtract(xor, carry);
 		}
-
 #if Other
 		public static int Subtract(int x, int y) => Add(x, Negate(y));
 #endif

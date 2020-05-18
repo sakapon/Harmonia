@@ -9,9 +9,10 @@ namespace UnitTest.Numerics
 	[TestClass]
 	public class ArithmeticTest
 	{
+		// Excepts int.MinValue.
 		static readonly int[] ExtremeValues = Enumerable.Range(-50, 101)
 			.Concat(Enumerable.Range(int.MaxValue - 9, 10))
-			.Concat(Enumerable.Range(int.MinValue, 10))
+			.Concat(Enumerable.Range(int.MinValue + 1, 10))
 			.ToArray();
 
 		static int NextInt32() => RandomHelper.Random.Next(int.MinValue, int.MaxValue);

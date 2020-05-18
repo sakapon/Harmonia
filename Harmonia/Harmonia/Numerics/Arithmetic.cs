@@ -7,6 +7,7 @@ namespace Harmonia.Numerics
 		// 1 << 31 == int.MinValue
 		const int f31 = 1 << 31;
 
+		// f31 -> f31
 		public static int Negate(int x) => Add(~x, 1);
 #if Other
 		public static int Negate(int x) => ~Subtract(x, 1);
@@ -50,6 +51,8 @@ namespace Harmonia.Numerics
 		public static int Quotient(int x, int y) => Divide(x, y).q;
 		public static int Remainder(int x, int y) => Divide(x, y).r;
 
+		// x または y が int.MinValue の場合、組込み演算の結果と等しくならないことがあります。
+		// y = y >> 1 & int.MaxValue などとして最上位ビットを扱う方法が考えられます。
 		public static (int q, int r) Divide(int x, int y)
 		{
 			if (y == 0) throw new DivideByZeroException();

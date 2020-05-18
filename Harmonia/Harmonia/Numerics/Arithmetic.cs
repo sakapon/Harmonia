@@ -18,13 +18,7 @@ namespace Harmonia.Numerics
 		{
 			var nx = (x & f31) != 0;
 			var ny = (y & f31) != 0;
-			if (nx ^ ny) return nx;
-			if (nx) return LessThan(Negate(y), Negate(x));
-
-			var xor = x ^ y;
-			for (var f = 1 << 30; f != 0; f >>= 1)
-				if ((xor & f) != 0) return (y & f) != 0;
-			return false;
+			return (nx ^ ny) ? nx : ((x - y) & f31) != 0;
 		}
 
 		public static int Add(int x, int y)
@@ -69,9 +63,9 @@ namespace Harmonia.Numerics
 			}
 
 			int q = 0, f = 1;
-			for (; x > y && (y & 0x40000000) == 0; y <<= 1, f <<= 1) ;
+			for (; (y & 1 << 30) == 0 && LessThan(y, x); y <<= 1, f <<= 1) ;
 			for (; x != 0 && f != 0; y >>= 1, f >>= 1)
-				if (x >= y) { x = Subtract(x, y); q |= f; }
+				if (!LessThan(x, y)) { x = Subtract(x, y); q |= f; }
 			return (q, x);
 		}
 	}

@@ -48,20 +48,6 @@ namespace UnitTest.Numerics
 		}
 
 		[TestMethod]
-		public void Multiply_Byte()
-		{
-			void Test(byte x, byte y) => Assert.AreEqual((byte)(x * y), Arithmetic.Multiply(x, y));
-
-			Test(0, 123);
-			Test(1, 123);
-			Test(123, 0);
-			Test(123, 1);
-
-			for (int i = 0; i < 1000; i++)
-				Test((byte)NextInt32(), (byte)NextInt32());
-		}
-
-		[TestMethod]
 		public void Multiply()
 		{
 			void Test(int x, int y) => Assert.AreEqual(x * y, Arithmetic.Multiply(x, y));

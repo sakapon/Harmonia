@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Harmonia.Numerics;
 using KLibrary.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -8,6 +9,11 @@ namespace UnitTest.Numerics
 	[TestClass]
 	public class ArithmeticTest
 	{
+		static readonly int[] ExtremeValues = Enumerable.Range(-50, 101)
+			.Concat(Enumerable.Range(int.MaxValue - 9, 10))
+			.Concat(Enumerable.Range(int.MinValue, 10))
+			.ToArray();
+
 		static int NextInt32() => RandomHelper.Random.Next(int.MinValue, int.MaxValue);
 
 		[TestMethod]
@@ -15,8 +21,8 @@ namespace UnitTest.Numerics
 		{
 			void Test(int x, int y) => Assert.AreEqual(x < y, Arithmetic.LessThan(x, y));
 
-			for (int i = -50; i <= 50; i++)
-				for (int j = -50; j <= 50; j++)
+			foreach (var i in ExtremeValues)
+				foreach (var j in ExtremeValues)
 					Test(i, j);
 
 			for (int i = 0; i < 1000; i++)
@@ -28,8 +34,9 @@ namespace UnitTest.Numerics
 		{
 			void Test(int x, int y) => Assert.AreEqual(x + y, Arithmetic.Add(x, y));
 
-			Test(0, 123);
-			Test(123, 0);
+			foreach (var i in ExtremeValues)
+				foreach (var j in ExtremeValues)
+					Test(i, j);
 
 			for (int i = 0; i < 1000; i++)
 				Test(NextInt32(), NextInt32());
@@ -40,8 +47,9 @@ namespace UnitTest.Numerics
 		{
 			void Test(int x, int y) => Assert.AreEqual(x - y, Arithmetic.Subtract(x, y));
 
-			Test(0, 123);
-			Test(123, 0);
+			foreach (var i in ExtremeValues)
+				foreach (var j in ExtremeValues)
+					Test(i, j);
 
 			for (int i = 0; i < 1000; i++)
 				Test(NextInt32(), NextInt32());
@@ -52,10 +60,9 @@ namespace UnitTest.Numerics
 		{
 			void Test(int x, int y) => Assert.AreEqual(x * y, Arithmetic.Multiply(x, y));
 
-			Test(0, 123);
-			Test(1, 123);
-			Test(123, 0);
-			Test(123, 1);
+			foreach (var i in ExtremeValues)
+				foreach (var j in ExtremeValues)
+					Test(i, j);
 
 			for (int i = 0; i < 1000; i++)
 				Test(NextInt32(), NextInt32());
@@ -73,21 +80,9 @@ namespace UnitTest.Numerics
 
 			Assert.ThrowsException<DivideByZeroException>(() => Arithmetic.Divide(123, 0));
 
-			for (int i = -100; i <= 100; i++)
-			{
-				Test(i, 30);
-				Test(i, 31);
-				Test(i, -30);
-				Test(i, -31);
-
-				if (i != 0)
-				{
-					Test(30, i);
-					Test(31, i);
-					Test(-30, i);
-					Test(-31, i);
-				}
-			}
+			foreach (var i in ExtremeValues)
+				foreach (var j in ExtremeValues)
+					if (j != 0) Test(i, j);
 
 			for (int i = 0; i < 1000; i++)
 			{

@@ -114,7 +114,7 @@ namespace Harmonia.Numerics
 		}
 
 		/// <summary>
-		/// 指定された範囲内の素数をすべて求めます。O(√M)? or O(M - m)?
+		/// 指定された範囲内の素数をすべて求めます。O(√M + (M - m))?
 		/// </summary>
 		/// <param name="m">最小値。</param>
 		/// <param name="M">最大値。</param>
